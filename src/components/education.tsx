@@ -4,14 +4,36 @@ export default function Education() {
       <h2 className="text-sm font-semibold uppercase tracking-widest text-accent">
         Education
       </h2>
-      <div className="mt-6 bento-card">
-        <h3 className="font-semibold text-foreground">
-          University of Texas at Austin
-        </h3>
-        <p className="mt-1 text-sm text-muted">
-          B.S. Electrical and Computer Engineering, High Honors
-        </p>
-        <p className="mt-1 text-sm text-muted">GPA: 3.92 | 2019 – 2023</p>
+      <div className="mt-6 grid gap-4 sm:grid-cols-3">
+        <div className="bento-card sm:col-span-2">
+          <h3 className="font-semibold text-foreground">
+            University of Texas at Austin
+          </h3>
+          <p className="mt-1 text-sm text-muted">
+            B.S. Electrical and Computer Engineering, High Honors
+          </p>
+          <p className="mt-1 text-sm text-muted">GPA: 3.92 | Aug 2019 – May 2023</p>
+        </div>
+        <div className="bento-card">
+          <h3 className="text-sm font-semibold text-foreground">Coursework</h3>
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {[
+              "Algorithms",
+              "Software Architecture",
+              "Embedded Systems",
+              "Data Science",
+              "Software Design & Implementation",
+              "Software Engineering Lab",
+            ].map((course) => (
+              <span
+                key={course}
+                className="rounded-md bg-surface-raised px-2.5 py-1 text-xs text-muted"
+              >
+                {course}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
