@@ -50,40 +50,38 @@ const jobs = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="px-6 py-24">
-      <div className="mx-auto max-w-3xl">
-        <h2 className="text-sm font-semibold uppercase tracking-widest text-accent">
-          Experience
-        </h2>
-        <div className="mt-10 space-y-12">
-          {jobs.map((job) => (
-            <div key={job.company} className="relative pl-6 border-l border-border">
-              <div className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-accent" />
-              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-                <div>
-                  <h3 className="font-semibold text-foreground">
-                    {job.company}
-                  </h3>
-                  <p className="text-sm text-muted">{job.title}</p>
-                </div>
-                <div className="text-sm text-muted sm:text-right">
-                  <p>{job.dates}</p>
-                  <p>{job.location}</p>
-                </div>
+    <section id="experience" className="section-glow py-24">
+      <h2 className="text-sm font-semibold uppercase tracking-widest text-accent">
+        Experience
+      </h2>
+      <div className="mt-6 grid gap-4 md:grid-cols-2">
+        {jobs.map((job) => (
+          <div
+            key={job.company}
+            className="bento-card flex flex-col"
+          >
+            <div className="flex items-start justify-between gap-2">
+              <div>
+                <h3 className="font-semibold text-foreground">{job.company}</h3>
+                <p className="text-sm text-accent">{job.title}</p>
               </div>
-              <ul className="mt-4 space-y-2">
-                {job.bullets.map((bullet, i) => (
-                  <li
-                    key={i}
-                    className="text-sm leading-relaxed text-muted before:mr-2 before:text-border before:content-['—']"
-                  >
-                    {bullet}
-                  </li>
-                ))}
-              </ul>
+              <div className="shrink-0 text-right text-xs text-muted">
+                <p>{job.dates}</p>
+                <p>{job.location}</p>
+              </div>
             </div>
-          ))}
-        </div>
+            <ul className="mt-4 space-y-2 flex-1">
+              {job.bullets.map((bullet, i) => (
+                <li
+                  key={i}
+                  className="text-sm leading-relaxed text-muted pl-4 relative before:absolute before:left-0 before:top-2.5 before:h-1 before:w-1 before:rounded-full before:bg-accent/40"
+                >
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
     </section>
   );

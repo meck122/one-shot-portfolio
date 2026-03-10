@@ -5,6 +5,7 @@ import { useState } from "react";
 const links = [
   { href: "#about", label: "About" },
   { href: "#experience", label: "Experience" },
+  { href: "#projects", label: "Projects" },
   { href: "#skills", label: "Skills" },
   { href: "#education", label: "Education" },
   { href: "#contact", label: "Contact" },
@@ -14,9 +15,12 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-        <a href="#" className="text-sm font-semibold tracking-tight text-foreground">
+    <nav className="fixed top-0 z-50 w-full bg-background/60 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <a
+          href="#"
+          className="text-sm font-bold tracking-tight gradient-text"
+        >
           ML
         </a>
 
@@ -26,7 +30,7 @@ export default function Nav() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-sm text-muted transition-colors hover:text-foreground"
+                className="text-sm text-muted transition-colors duration-200 hover:text-foreground"
               >
                 {link.label}
               </a>
@@ -59,13 +63,13 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {open && (
-        <ul className="border-t border-border px-6 pb-4 md:hidden">
+        <ul className="border-t border-border bg-background/90 px-6 pb-4 backdrop-blur-xl md:hidden">
           {links.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="block py-2 text-sm text-muted transition-colors hover:text-foreground"
+                className="block py-2.5 text-sm text-muted transition-colors hover:text-foreground"
               >
                 {link.label}
               </a>
