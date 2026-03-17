@@ -64,7 +64,7 @@ export default function Experience({ jobs = allJobs }: { jobs?: Job[] }) {
       <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
         Experience
       </h2>
-      <div className="mt-8 grid gap-4 md:grid-cols-2">
+      <div className={`mt-8 grid gap-4 ${jobs.length >= 2 ? "md:grid-cols-2" : ""}`}>
         {jobs.map((job) => (
           <div
             key={job.company}
