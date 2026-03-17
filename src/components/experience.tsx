@@ -1,4 +1,12 @@
-const jobs = [
+interface Job {
+  company: string;
+  title: string;
+  location: string;
+  dates: string;
+  bullets: string[];
+}
+
+const allJobs: Job[] = [
   {
     company: "ZoomInfo",
     title: "Software Engineer III, TalentOS",
@@ -48,13 +56,15 @@ const jobs = [
   },
 ];
 
-export default function Experience() {
+export { allJobs };
+
+export default function Experience({ jobs = allJobs }: { jobs?: Job[] }) {
   return (
-    <section id="experience" className="section-glow py-24">
-      <h2 className="text-sm font-semibold uppercase tracking-widest text-accent">
+    <div>
+      <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
         Experience
       </h2>
-      <div className="mt-6 grid gap-4 md:grid-cols-2">
+      <div className="mt-8 grid gap-4 md:grid-cols-2">
         {jobs.map((job) => (
           <div
             key={job.company}
@@ -62,10 +72,10 @@ export default function Experience() {
           >
             <div className="flex items-start justify-between gap-2">
               <div>
-                <h3 className="font-semibold text-foreground">{job.company}</h3>
-                <p className="text-sm text-accent">{job.title}</p>
+                <h3 className="text-base font-semibold text-foreground">{job.company}</h3>
+                <p className="mt-0.5 text-sm text-accent/80">{job.title}</p>
               </div>
-              <div className="shrink-0 text-right text-xs text-muted">
+              <div className="shrink-0 text-right text-xs text-muted/70">
                 <p>{job.dates}</p>
                 <p>{job.location}</p>
               </div>
@@ -74,7 +84,7 @@ export default function Experience() {
               {job.bullets.map((bullet, i) => (
                 <li
                   key={i}
-                  className="text-sm leading-relaxed text-muted pl-4 relative before:absolute before:left-0 before:top-2.5 before:h-1 before:w-1 before:rounded-full before:bg-accent/40"
+                  className="text-sm leading-relaxed text-muted pl-4 relative before:absolute before:left-0 before:top-[9px] before:h-1 before:w-1 before:rounded-full before:bg-accent/30"
                 >
                   {bullet}
                 </li>
@@ -83,6 +93,6 @@ export default function Experience() {
           </div>
         ))}
       </div>
-    </section>
+    </div>
   );
 }

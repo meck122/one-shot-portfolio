@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const links = [
   { href: "#about", label: "About" },
@@ -13,13 +13,73 @@ const links = [
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Scroll-spy: observe all snap-sections
+  useEffect(() => {
+    const sectionIds = ["hero", "about", "experience", "experience-2", "experience-3", "projects", "skills", "education", "contact"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    for (const id of sectionIds) {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const handleNavClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      e.preventDefault();
+      const id = href.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        window.history.pushState(null, "", href);
+      }
+      setOpen(false);
+    },
+    []
+  );
+
+  const isActive = (href: string) => {
+    const id = href.replace("#", "");
+    // "experience" link is active for both experience and experience-2
+    if (id === "experience") {
+      return activeSection === "experience" || activeSection === "experience-2" || activeSection === "experience-3";
+    }
+    return activeSection === id;
+  };
 
   return (
-    <nav className="fixed top-0 z-50 w-full bg-background/60 backdrop-blur-xl">
+    <nav
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
+        scrolled
+          ? "bg-background/80 shadow-lg shadow-black/20 backdrop-blur-xl"
+          : "bg-transparent"
+      }`}
+    >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a
-          href="#"
-          className="text-sm font-bold tracking-tight gradient-text"
+          href="#hero"
+          onClick={(e) => handleNavClick(e, "#hero")}
+          className="text-base font-bold tracking-tight gradient-text"
         >
           ML
         </a>
@@ -30,7 +90,12 @@ export default function Nav() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-sm text-muted transition-colors duration-200 hover:text-foreground"
+                onClick={(e) => handleNavClick(e, link.href)}
+                className={`text-sm transition-colors duration-200 ${
+                  isActive(link.href)
+                    ? "text-accent font-medium"
+                    : "text-muted hover:text-foreground"
+                }`}
               >
                 {link.label}
               </a>
@@ -68,8 +133,12 @@ export default function Nav() {
             <li key={link.href}>
               <a
                 href={link.href}
-                onClick={() => setOpen(false)}
-                className="block py-2.5 text-sm text-muted transition-colors hover:text-foreground"
+                onClick={(e) => handleNavClick(e, link.href)}
+                className={`block py-2.5 text-sm transition-colors ${
+                  isActive(link.href)
+                    ? "text-accent font-medium"
+                    : "text-muted hover:text-foreground"
+                }`}
               >
                 {link.label}
               </a>

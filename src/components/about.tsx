@@ -1,10 +1,10 @@
 export default function About() {
   return (
-    <section id="about" className="section-glow py-24">
-      <h2 className="text-sm font-semibold uppercase tracking-widest text-accent">
+    <div>
+      <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
         About
       </h2>
-      <div className="mt-6 bento-card">
+      <div className="mt-8 bento-card">
         <p className="text-base leading-relaxed text-muted">
           Software engineer with experience building production systems across
           cloud commerce, agentic AI, and e-commerce domains. I&apos;ve shipped
@@ -14,6 +14,6 @@ export default function About() {
           making systems that scale.
         </p>
       </div>
-    </section>
+    </div>
   );
 }
