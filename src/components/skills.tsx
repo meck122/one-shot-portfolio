@@ -15,11 +15,11 @@ const categories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="section-glow py-24">
-      <h2 className="text-sm font-semibold uppercase tracking-widest text-accent">
+    <div>
+      <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
         Skills
       </h2>
-      <div className="mt-6 grid gap-4 sm:grid-cols-3">
+      <div className="mt-8 grid gap-4 sm:grid-cols-3">
         {categories.map((cat) => (
           <div key={cat.name} className="bento-card">
             <h3 className="text-sm font-semibold text-foreground">
@@ -29,7 +29,7 @@ export default function Skills() {
               {cat.items.map((item) => (
                 <span
                   key={item}
-                  className="rounded-md bg-surface-raised px-3 py-1.5 text-sm text-muted"
+                  className="rounded-md bg-surface-raised px-3 py-1.5 text-sm text-muted transition-colors duration-200 hover:text-foreground hover:bg-accent/10"
                 >
                   {item}
                 </span>
@@ -38,6 +38,6 @@ export default function Skills() {
           </div>
         ))}
       </div>
-    </section>
+    </div>
   );
 }
