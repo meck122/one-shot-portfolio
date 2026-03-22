@@ -57,7 +57,7 @@ export default function Projects() {
               </div>
               <div className="mt-5 flex gap-3">
                 <a
-                  href="https://jduel.xyz"
+                  href="https://jduel.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-1.5 rounded-lg bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition-all duration-200 hover:bg-accent/20"
